@@ -1,22 +1,26 @@
+require( './data/init' );
 const express = require( 'express' );
-const morgan = require( 'morgan' );
-const bodyParser = require( 'body-parser' );
-const { urlencoded } = require('body-parser');
+
+const dotenv = require( 'dotenv' );
+
+const authRouter = require( './routes/auth' );
+
+
 
 const app = express();
+dotenv.config();
 
-const port = process.env.PORT || 3000
+const PORT = process.env.PORT || 4000
 
 app.use( express.json() );
-// app.use( morgan );
-
-// app.use(bodyParser.json());
 app.use( express.urlencoded( { extended: false } ) );
 
+app.use( '/auth', authRouter );
 
-app.listen( port , error => {
+
+app.listen( PORT , error => {
     if( error ){
         console.error( error.message );
     }
-    console.log( `server is running at ${port} `);
+    console.log( `Server started on http://localhost:${PORT}` );
 })
