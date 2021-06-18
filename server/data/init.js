@@ -4,6 +4,7 @@ const dotenv = require( 'dotenv' );
 
 
 require( '../models/user');
+require( '../models/product');
 
 dotenv.config();
 

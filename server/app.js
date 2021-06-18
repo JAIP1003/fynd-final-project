@@ -4,6 +4,7 @@ const express = require( 'express' );
 const dotenv = require( 'dotenv' );
 
 const authRouter = require( './routes/auth' );
+const productRouter = require( './routes/product' );
 
 
 
@@ -16,6 +17,7 @@ app.use( express.json() );
 app.use( express.urlencoded( { extended: false } ) );
 
 app.use( '/auth', authRouter );
+app.use( '/product', productRouter );
 
 
 app.listen( PORT , error => {
