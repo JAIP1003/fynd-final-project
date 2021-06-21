@@ -34,17 +34,17 @@ export default {
         return{
             items: items,
             product: null,
-            active: {
-                product_drawer: false
-            }
+            // active: {
+            //     product_drawer: false
+            // }
 
         }
     },
     methods:{
         viewProduct( product ){
             this.product = product;
-            this.active.product_drawer = true
-            console.log( this.product );
+           // this.active.product_drawer = true
+            // console.log( this.product );
         },
         productNull(product){
             this.product = product;

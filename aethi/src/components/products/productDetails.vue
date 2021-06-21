@@ -12,9 +12,9 @@
             </div>
 
             <div class="button-container">
-                <button class="remove">Remove from Cart</button>
-                <button class="add">Add to Cart</button>
-                <button class="add" @click="$emit('go-back',null)">Go Back</button>
+                <button class="remove view-product-button" @click="removeFromCart()">Remove from Cart</button>
+                <button class="add view-product-button" @click="addToCart()">Add to Cart</button>
+                <button class="add view-product-button" @click="$emit('go-back',null)">Go Back</button>
             </div>
         </div>
     </div>
@@ -22,15 +22,24 @@
 </template>
 
 <script>
+
+import  store  from "../../store/index";
 export default {
     name: 'ProductDetails',
     props: [
         'product',
-        'active'
         ],
     computed:{
         product_total(){
-            return 58.00
+            return store.getters.productQuantity( this.product );
+        }
+    },
+    methods: {
+        addToCart() {
+            store.commit( 'addToCart', this.product );
+        },
+        removeFromCart(){
+            store.commit( 'removeFromCart' , this.product );
         }
     }
     
@@ -41,6 +50,16 @@ export default {
  .drawer{
      text-align: center;
  }
+ button.view-product-button{
+        padding: 10px;
+        background-color: rgb(79, 160,187);
+        border: none;
+        color: white;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0 20px;
+    }
    
   
 </style>
