@@ -21,8 +21,51 @@ const postProduct = ( req, res, next ) => {
             return next( err );
         })
 
+};
+
+const getProduct = ( req, res, next ) => {
+    const items = req.body;
+
+    Product
+        .find()
+        .then( items => {
+                res.json( items ); // comes from imported data/Meetings.json
+        })
+        .catch( err => {
+            err.status = 500;
+            return next(err);
+        })
+};
+
+const updateProduct = ( req, res, next ) => {
+    const id = req.params.id;
+    const patchProductDetails = req.body;
+
+    Product
+        .findByIdAndUpdate( id , patchProductDetails, { runValidators: true} )
+        .then( updatedProduct => res.json( updatedProduct ))
+        .catch( err => {
+            err.status = 500;
+            return next(err);
+        });
+};
+
+const removeProduct = ( req, res, next ) => {
+    const id = req.params.id;
+
+    Product
+        .findByIdAndRemove( id )
+        .then( () => res.status(404).send())
+        .catch( err => {
+            err.status = 500;
+            return next(err);
+        });
 }
 
 module.exports = {
-    postProduct
+    postProduct,
+    getProduct,
+    updateProduct,
+    removeProduct
+
 }

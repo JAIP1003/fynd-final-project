@@ -10,7 +10,7 @@
                     <router-link class="nav-link" to="/">Home</router-link>
                 </li>
                 <li class="nav-item exact">
-                    <router-link class="nav-link" to="/search">Search</router-link>
+                    <router-link class="nav-link" to="/adminHome">Search</router-link>
                 </li>
                  <li class="nav-item">
                     <router-link class="nav-link" to="/cart">Cart</router-link>

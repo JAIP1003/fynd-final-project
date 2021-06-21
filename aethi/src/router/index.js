@@ -2,7 +2,9 @@ import Router from 'vue-router';
 
 
 import AppHome from '@/components/AppHome';
-import AppSearch from '@/components/AppSearch';
+import AdminHome from '@/components/AdminHome';
+import AddProduct from '@/components/adminProducts/addProduct';
+//import AppSearch from '@/components/AppSearch';
 import AppCart from '@/components/AppCart';
 import AppPageNotFound from '@/components/AppPageNotFound';
 
@@ -16,9 +18,14 @@ const router = new Router({
             component: AppHome
         },
         {
-            name: 'search',
-            path: '/search',
-            component: AppSearch
+            name: 'adminHome',
+            path: '/AdminHome',
+            component: AdminHome
+        },
+        {
+            name: 'addProduct',
+            path: '/addProduct',
+            component: AddProduct
         },
         {
             name: 'cart',
