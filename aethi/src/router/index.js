@@ -4,9 +4,10 @@ import Router from 'vue-router';
 import AppHome from '@/components/AppHome';
 import AdminHome from '@/components/AdminHome';
 import AddProduct from '@/components/adminProducts/addProduct';
-//import AppSearch from '@/components/AppSearch';
+import AppLogin from '@/components/AppLogin';
+import AppSignup from '@/components/AppSignup';
 import AppCart from '@/components/AppCart';
-import AppPageNotFound from '@/components/AppPageNotFound';
+import AppPageNotFound from '@/components/PageNotFound';
 
 
 const router = new Router({
@@ -31,6 +32,16 @@ const router = new Router({
             name: 'cart',
             path: '/cart',
             component: AppCart
+        },
+        {
+            name: 'login',
+            path: '/login',
+            component: AppLogin
+        },
+        {
+            name: 'signup',
+            path: '/signup',
+            component: AppSignup
         },
         {
             name: 'page-not-found',

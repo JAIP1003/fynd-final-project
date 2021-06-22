@@ -10,23 +10,14 @@
                     <router-link class="nav-link" to="/">Home</router-link>
                 </li>
                 <li class="nav-item exact">
-                    <router-link class="nav-link" to="/adminHome">Search</router-link>
+                    <router-link class="nav-link" to="/adminHome">Admin</router-link>
                 </li>
                  <li class="nav-item">
                     <router-link class="nav-link" to="/cart">Cart</router-link>
                 </li>
-                
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownId">
-                        <a class="dropdown-item" href="#">Action 1</a>
-                        <a class="dropdown-item" href="#">Action 2</a>
-                    </div>
-                </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <router-link to="/login"><button class="btn btn-outline-success my-2 my-sm-0">Logout</button></router-link>
             </form>
         </div>
     </nav>
