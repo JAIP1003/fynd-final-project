@@ -24,10 +24,21 @@ const postProduct = ( req, res, next ) => {
 };
 
 const getProduct = ( req, res, next ) => {
-    const items = req.body;
-
     Product
         .find()
+        .then( items => {
+                res.json( items ); // comes from imported data/Meetings.json
+        })
+        .catch( err => {
+            err.status = 500;
+            return next(err);
+        })
+};
+const getProductById = ( req, res, next ) => {
+    const id = req.params.id;
+
+    Product
+        .findById( id )
         .then( items => {
                 res.json( items ); // comes from imported data/Meetings.json
         })
@@ -47,7 +58,7 @@ const updateProduct = ( req, res, next ) => {
         .catch( err => {
             err.status = 500;
             return next(err);
-        });
+        })
 };
 
 const removeProduct = ( req, res, next ) => {
@@ -55,17 +66,18 @@ const removeProduct = ( req, res, next ) => {
 
     Product
         .findByIdAndRemove( id )
-        .then( () => res.status(404).send())
+        .then( () => res.status(204).send())
         .catch( err => {
             err.status = 500;
             return next(err);
-        });
+        })
 }
 
 module.exports = {
     postProduct,
     getProduct,
     updateProduct,
-    removeProduct
+    removeProduct,
+    getProductById
 
 }

@@ -1,17 +1,15 @@
 const mongoose = require( 'mongoose' );
 
-const { Category } = require( './category' );
-const { Owner } = require( './owner' );
-
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
     category: {
         type: String
     },
-    owner: {
-        type: Schema.Types.ObjectId,
-        ref: "Owner"
+    ownerId: {
+        type: String,
+        required: true,
+        unique: true
     },
     name: { 
         type: String,
