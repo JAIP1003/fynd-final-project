@@ -1,5 +1,6 @@
 require( './data/init' );
 const express = require( 'express' );
+const cors = require('cors');
 
 const dotenv = require( 'dotenv' );
 
@@ -9,6 +10,8 @@ const productRouter = require( './routes/product' );
 
 
 const app = express();
+app.use(cors());
+
 dotenv.config();
 
 const PORT = process.env.PORT || 4000
@@ -17,7 +20,7 @@ app.use( express.json() );
 app.use( express.urlencoded( { extended: false } ) );
 
 app.use( '/auth', authRouter );
-app.use( '/product', productRouter );
+app.use( '/product', cors() ,productRouter );
 
 
 app.listen( PORT , error => {

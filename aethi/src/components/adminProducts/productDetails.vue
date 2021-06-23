@@ -6,14 +6,9 @@
             <p class="description">{{product.description}}</p>
             <h3 class="text-center">${{product.price.toFixed(2)}}</h3>
 
-            <!-- <div class="cart-total" v-if="product_total">
-                <h3>In Cart</h3>
-                <h4>{{product_total}}</h4>
-            </div> -->
-
             <div class="button-container">
-                <button class="remove view-product-button" @click="removeFromCart()">Remove Product</button>
-                <button class="add view-product-button" @click="addToCart()">Update Product</button>
+                <button class="remove view-product-button" @click="removeTheProduct(), $emit('go-back',null)">Remove Product</button>
+                <button class="add view-product-button" @click="updateTheProduct()">Update Product</button>
                 <button class="add view-product-button" @click="$emit('go-back',null)">Go Back</button>
             </div>
         </div>
@@ -22,24 +17,46 @@
 </template>
 
 <script>
-
-import  store  from "../../store/index";
+    import Vue from 'vue';
+    import { deleteProductById } from '@/services/product';
 export default {
     name: 'ProductDetails',
     props: [
         'product',
         ],
-    computed:{
-        product_total(){
-            return store.getters.productQuantity( this.product );
-        }
-    },
     methods: {
-        addToCart() {
-            store.commit( 'addToCart', this.product );
-        },
-        removeFromCart(){
-            store.commit( 'removeFromCart' , this.product );
+        // updateTheProduct() {
+        //      updateProductById( this.product._id )
+        //     .then( () =>  {
+        //             this.$router.push( { name: 'adminHome' } )  
+        //              Vue.$toast.open({
+        //                 message: `Product has been successfully updated`,
+        //                 type: 'success'
+        //             });
+        //         })
+        //         .catch( error => {
+        //             Vue.$toast.open({
+        //                 message: error.response.data.message,
+        //                 type: 'error'
+        //             });
+        //         });
+        // }
+        //},
+        removeTheProduct(){
+            deleteProductById( this.product._id )
+            .then( () =>  {
+                    this.$router.push( { name: 'adminHome' } )  
+                     Vue.$toast.open({
+                        message: `Product has been successfully deleted`,
+                        type: 'success'
+                    });
+                })
+                .catch( error => {
+                    Vue.$toast.open({
+                        message: error.response.data.message,
+                        type: 'error'
+                    });
+                });
         }
     }
     

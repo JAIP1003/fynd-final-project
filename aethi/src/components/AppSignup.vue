@@ -4,7 +4,7 @@
             <div class="offset-0 offset-md-3 col-12 col-md-6">
                 <h1>Signup</h1>
                 <hr />
-                <form method="POST" @submit.prevent="signup" >
+                <form method="POST" @submit.prevent="signup()" >
 
                      <div class="form-group">
                         <label for="name">Enter Name</label>
@@ -128,7 +128,7 @@
 <script>
     import Vue from 'vue';
     import { email, required, minLength } from 'vuelidate/lib/validators'
-    import { fetchUser } from '@/services/signup';
+    import { registerUser } from '@/services/signup';
    //import config from '@/config';
     export default {
         name: 'AppSignUp',
@@ -175,8 +175,7 @@
         },
          methods: {
            signup(){
-
-            fetchUser({ name: this.form.name, email: this.form.email, password: this.form.password, role: this.form.userType  })
+            registerUser({ name: this.form.name, email: this.form.email, password: this.form.password, role: this.form.userType  })
                 .then( () =>  this.$router.push( { name: 'login' } )  )
                 .catch( error => {
                     Vue.$toast.open({

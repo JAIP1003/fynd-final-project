@@ -10,28 +10,39 @@ import AppCart from '@/components/AppCart';
 import AppPageNotFound from '@/components/PageNotFound';
 
 
+import authstore from '@/store/authStore';
+
+
+const meta ={
+    authorize:[]
+};
+
 const router = new Router({
     mode: 'history',
     routes: [
         {
             name: 'home',
             path: '/',
-            component: AppHome
+            component: AppHome,
+            meta
         },
         {
             name: 'adminHome',
-            path: '/AdminHome',
-            component: AdminHome
+            path: '/adminHome',
+            component: AdminHome,
+            meta
         },
         {
             name: 'addProduct',
             path: '/addProduct',
-            component: AddProduct
+            component: AddProduct,
+            meta
         },
         {
             name: 'cart',
             path: '/cart',
-            component: AppCart
+            component: AppCart,
+            meta
         },
         {
             name: 'login',
@@ -49,6 +60,17 @@ const router = new Router({
             component: AppPageNotFound
         },
     ]
+});
+
+
+router.beforeEach(( to, from, next ) => {
+    if( to.meta.authorize && !authstore.getters.isAuthenticated ){
+        next({
+            name: 'login'
+        });
+    } else {
+        next();
+    }
 });
 
 export default router;

@@ -1,6 +1,10 @@
 <template>
-    <div class="home">
-
+   
+    <div class="home" >
+         <div class="jumbotron" v-if="status === 'LOADING'">
+             <strong> hang on.....We are fetching data..</strong>
+         </div>
+         <div v-else>
         <div v-if="product === null" class="product-card-container">
             <product-summary-card
             v-for="product in items"
@@ -17,13 +21,15 @@
             >
             </product-details>
         </div>
+        </div>
     </div>
 </template>
 
 <script>
-import items  from '@/data/item';
+//import items  from '@/data/item';
 import ProductSummaryCard from './products/productSummaryCard';
 import productDetails from './products/productDetails';
+import { fetchProducts } from '@/services/product';
 export default {
     name: 'AppHome',
     components:{
@@ -32,24 +38,34 @@ export default {
     },
     data(){
         return{
-            items: items,
+            items: [],
             product: null,
-            // active: {
-            //     product_drawer: false
-            // }
+            status: 'LOADING',
+            error : null
 
         }
     },
     methods:{
         viewProduct( product ){
             this.product = product;
-           // this.active.product_drawer = true
-            // console.log( this.product );
         },
         productNull(product){
             this.product = product;
-        }
-    }
+        },
+
+    },
+     created() { 
+        this.status = 'LOADING';
+        fetchProducts()
+            .then( items => {
+                this.items = items;
+                this.status = 'LOADED'
+            })
+            .catch( error => {
+                this.error = error;
+                this.status = 'ERROR'
+            })
+    },
     
 }
 </script>

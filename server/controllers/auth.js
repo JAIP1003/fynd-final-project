@@ -77,6 +77,7 @@ const login = ( req, res, next ) => {
                     }
                     res.json({
                         email: user.email,
+                        role: user.role,
                         token: token
                     });
                 });

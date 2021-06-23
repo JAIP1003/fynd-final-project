@@ -82,12 +82,14 @@
     import Vue from 'vue';
     import { email, required, minLength } from 'vuelidate/lib/validators'
     import  authstore  from '@/store/authStore';
+    //import { login } from '@/services/auth';
     //import config from '@/config';
     export default {
         name: 'AppLogin',
         data() {
             return {
                 processing: false,
+                error: null,
                 form: {
                     email: '',
                     password: ''
@@ -119,23 +121,25 @@
             }
         },
          methods: {
-            login(){
-            this.$v.form.$touch();
-
-            if( !this.$v.form.$invalid ){
-                authstore.dispatch( 'login', this.form )
-                .then( () =>  this.$router.push( { name: 'home' } )  )
-                .catch( error => {
-                    Vue.$toast.open({
-                        message: error.response.data.message,
-                       // duration: config.toastDuration,
-                        type: 'error'
-                    });
-                });
-            } else{
-                console.log( 'invalid input values' );
-            }
-        },
+             login() {
+                // mark the inputs as touched (revalidating for safety)
+                this.$v.form.$touch();
+                if( !this.$v.form.$invalid ) {
+                    authstore.dispatch( 'login', this.form )
+                    //login( this.form )
+                        .then( () => this.$router.push( { name: 'home' } ) )
+                        .catch( (err) => {
+                            this.error = err;
+                            Vue.$toast.open({
+                                message: this.error,
+                                duration: 5000,
+                                type: 'error'
+                            });
+                        });
+                } else {
+                    console.log( 'invalid input values' );
+                }
+            },
             shouldAppendValidClass( field ) {
                 console.log( field );
                 return !field.$invalid && field.$model && field.$dirty;
