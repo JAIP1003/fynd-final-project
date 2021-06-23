@@ -13,7 +13,7 @@ const { postProduct,
 const { authenticate, authorize } = require( '../middlewares/auth' );
 
 // get request - get all product
-router.get( '/',/* authenticate,*/ getProduct );
+router.get( '/',/*authenticate, */getProduct );
 
 // get request - get a single product
 router.get( '/:id', authenticate, getProductById );

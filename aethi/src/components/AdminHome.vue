@@ -1,5 +1,6 @@
 <template>
-    <div class="home">
+    <div class="home" >
+        <div v-if="role === 'admin'">
         <div class="jumbotron" v-if="status === 'LOADING'">
              <strong> hang on.....We are fetching data..</strong>
          </div>
@@ -24,11 +25,18 @@
             <router-link to="/addProduct"><button class="view-product-button">Add More Product</button> </router-link>
         </div>
          </div>
+        </div>
+        <div v-else>
+            <div class="jumbotron">
+                You are not authorize to access this page....
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
 //import items  from '@/data/item';
+import authstore from '../store/authStore'
 import ProductSummaryCard from './adminProducts/productSummaryCard';
 import ProductDetails from './adminProducts/productDetails';
 import { fetchProducts } from '@/services/product';
@@ -46,6 +54,11 @@ export default {
             error : null
 
         }
+    },
+    computed: {
+        role(){
+        return authstore.state.auth.role;
+      },
     },
     methods:{
         viewProduct( product ){

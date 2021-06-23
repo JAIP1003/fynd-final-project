@@ -18,7 +18,7 @@
                 </li>
             </ul>
             <ul class="navbar-nav  mt-2 mt-lg-0">
-                <li class="nav-item p-2">Hello <span class="p-2" style="color:white">{{email}}{{role}}</span></li>
+                <li class="nav-item p-2">Hello <span class="p-2" style="color:white">{{email}}({{role}})</span></li>
                 <button class="btn btn-outline-success my-2 my-sm-0" @click="logout()">Logout</button>
             </ul>
         </div>
