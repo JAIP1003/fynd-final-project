@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const fetchProducts = () => {
     return axios.get(
-        `http://localhost:4000/product`,
+        `/product`,
         /*{
             headers: {
                 'Authorization': `Bearer ${getToken()}`
@@ -16,7 +16,7 @@ export const fetchProducts = () => {
 
 export const addProduct = ( data ) => {
     //console.log(data)
-    return axios.post(`http://localhost:4000/product`,
+    return axios.post(`/product`,
     data, 
     {
             headers: {
@@ -32,7 +32,7 @@ export const addProduct = ( data ) => {
 };
 
 export const deleteProductById = ( id ) => {
-    return axios.delete( `http://localhost:4000/product/${id}`,
+    return axios.delete( `/product/${id}`,
     /*{ withCredentials: true }*/
      )
                 .then( response => response.data )

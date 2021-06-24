@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const registerUser = ( data ) => {
         //console.log(data)
-        return axios.post(`http://localhost:4000/auth/register`,
+        return axios.post(`/auth/register`,
         data, 
         {
                 headers: {
