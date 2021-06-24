@@ -23,6 +23,10 @@ app.use( '/auth', authRouter );
 app.use( '/product', cors() ,productRouter );
 
 
+if( process.env.NODE_ENV === 'production'){
+    app.use( express.static( "aethi/dist"));
+}
+
 app.listen( PORT , error => {
     if( error ){
         console.error( error.message );
