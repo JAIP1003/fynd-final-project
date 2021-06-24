@@ -29,7 +29,7 @@
 
 <script>
 //import items  from '@/data/item';
-import authstore from '../store/authStore'
+//import authstore from '../store/authStore'
 import ProductSummaryCard from './adminProducts/productSummaryCard';
 import ProductDetails from './adminProducts/productDetails';
 import { fetchProducts } from '@/services/product';
@@ -48,11 +48,14 @@ export default {
 
         }
     },
-    computed: {
-        role(){
-        return authstore.state.auth.role;
-      },
-    },
+    // computed: {
+    //     role(){
+    //     return authstore.state.auth.role;
+    //   },
+    //   email(){
+    //     return authstore.state.auth.email;
+    //   },
+    // },
     methods:{
         viewProduct( product ){
             this.product = product;

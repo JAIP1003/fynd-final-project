@@ -1,5 +1,5 @@
 <template>
-    <div class="product-card">
+    <div class="product-card" v-if="product.ownerId === email">
         <h1>{{product.name}}</h1>
 
         <h5 class="price">price: ${{product.price.toFixed(2)}}</h5>
@@ -10,13 +10,17 @@
 </template>
 
 <script>
+import authstore from '../../store/authStore'
 export default {
     name: 'ProductSummaryCard',
     props: [ 'product' ],
     computed: {
         description(){
             return this.product.description.substring(0,150);
-        }
+        },
+         email(){
+            return authstore.state.auth.email;
+        },
     }
     
 }

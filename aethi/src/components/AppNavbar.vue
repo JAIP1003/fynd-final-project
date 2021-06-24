@@ -6,15 +6,15 @@
            
         <div class="navbar-collapse" id="collapsibleNavId" v-if="isAuthenticated">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item exact">
+                <li class="nav-item">
                     <!-- <span class="sr-only">(current)</span> -->
-                    <router-link class="nav-link" to="/">Home</router-link>
+                    <router-link class="nav-link" to="/" active-class="active" exact>Home</router-link>
                 </li>
-                <li class="nav-item exact" v-if="role === 'admin'">
-                    <router-link class="nav-link" to="/adminHome">Admin</router-link>
+                <li class="nav-item" v-if="role === 'admin'">
+                    <router-link class="nav-link" to="/adminHome" active-class="active">Admin</router-link>
                 </li>
-                 <li class="nav-item exact"> 
-                    <router-link class="nav-link" to="/cart">Cart({{cartSize}})</router-link>
+                 <li class="nav-item"> 
+                    <router-link class="nav-link" to="/cart" active-class="active">Cart({{cartSize}})</router-link>
                 </li>
             </ul>
             <ul class="navbar-nav  mt-2 mt-lg-0">
@@ -24,10 +24,10 @@
         </div>
           <ul class="nav navbar-nav" v-else>
                     <li class="nav-item">
-                        <router-link class="nav-link exact" :to="{ name : 'login' }">Login</router-link>
+                        <router-link class="nav-link" active-class="active" :to="{ name : 'login' }">Login</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link exact" :to="{ name : 'signup' }">Signup</router-link>
+                        <router-link class="nav-link" active-class="active" :to="{ name : 'signup' }">Signup</router-link>
                     </li>
                 </ul>
     </nav>
@@ -65,9 +65,12 @@ export default {
 
 <style scoped>
 .navbar-brand{
-    color: chartreuse;
+    color: chartreuse !important; 
 }
 .greet{
     color: rgb(214, 207, 221);
+}
+.active{
+    color: white !important;
 }
 </style>

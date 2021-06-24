@@ -131,7 +131,7 @@
                         .catch( (err) => {
                             this.error = err;
                             Vue.$toast.open({
-                                message: this.error,
+                                message: `No matching credentials + ${this.error}`,
                                 duration: 5000,
                                 type: 'error'
                             });
