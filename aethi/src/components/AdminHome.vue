@@ -1,6 +1,5 @@
 <template>
     <div class="home" >
-        <div v-if="role === 'admin'">
         <div class="jumbotron" v-if="status === 'LOADING'">
              <strong> hang on.....We are fetching data..</strong>
          </div>
@@ -25,12 +24,6 @@
             <router-link to="/addProduct"><button class="view-product-button">Add More Product</button> </router-link>
         </div>
          </div>
-        </div>
-        <div v-else>
-            <div class="jumbotron">
-                You are not authorize to access this page....
-            </div>
-        </div>
     </div>
 </template>
 

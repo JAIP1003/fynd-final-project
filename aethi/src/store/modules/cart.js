@@ -8,7 +8,7 @@ const kart = {
     },
     getters: {
         productQuantity: state => product => {
-            const item = state.cart.find( i => i.id === product.id )
+            const item = state.cart.find( i => i._id === product._id )
 
             if( item ) return item.quantity;
             else return null
@@ -16,13 +16,16 @@ const kart = {
         cartItems: state => {
             return state.cart;
         },
+        cartSize: state => {
+            return state.cart.length;
+        },
         cartTotal: state => {
             return state.cart.reduce( (a, b) => a + ( b.price * b.quantity ), 0)
         }
     },
     mutations:{
         addToCart( state, product ){
-            let item = state.cart.find( i => i.id === product.id );
+            let item = state.cart.find( i => i._id === product._id );
 
             if( item ){
                 item.quantity++;
@@ -33,14 +36,14 @@ const kart = {
             updateLocalStorage(state.cart);
         },
         removeFromCart( state, product ) {
-            let item = state.cart.find( i => i.id === product.id );
+            let item = state.cart.find( i => i._id === product._id );
 
             if( item ) {
                 if( item.quantity > 1 ){
                     item.quantity--;
                 }
                 else{
-                    state.cart = state.cart.filter( i => i.id !== product.id )
+                    state.cart = state.cart.filter( i => i._id !== product._id )
                 }
             }
             updateLocalStorage( state.cart );

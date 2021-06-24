@@ -17,7 +17,6 @@ router.get( '/',/*authenticate, */getProduct );
 
 // get request - get a single product
 router.get( '/:id', authenticate, getProductById );
-// router.get( '/:id', getProductById );
 
 // post request - create a new product
 router.post( '/' , /*authenticate, authorize( 'admin' ), /* upload.single("photo"),*/ postProduct );
