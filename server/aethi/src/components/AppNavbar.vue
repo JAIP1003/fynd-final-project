@@ -11,10 +11,13 @@
                     <router-link class="nav-link" to="/" active-class="active" exact>Home</router-link>
                 </li>
                 <li class="nav-item" v-if="role === 'admin'">
-                    <router-link class="nav-link" to="/adminHome" active-class="active">Admin</router-link>
+                    <router-link class="nav-link" to="/adminHome" active-class="active">My Product</router-link>
                 </li>
                  <li class="nav-item"> 
                     <router-link class="nav-link" to="/cart" active-class="active">Cart({{cartSize}})</router-link>
+                </li>
+                 <li class="nav-item"> 
+                    <router-link class="nav-link" to="/addProduct" active-class="active">Add Product</router-link>
                 </li>
             </ul>
             <ul class="navbar-nav  mt-2 mt-lg-0">
