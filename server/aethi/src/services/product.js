@@ -31,6 +31,24 @@ export const addProduct = ( data ) => {
     
 };
 
+
+export const updateProduct = ( data, id ) => {
+    return axios.patch(`/product/${id}`,
+    data, 
+    {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+    },
+    { withCredentials: true }
+    )
+     .then(response => response.data)
+     .catch(error => error.message 
+     ); 
+    
+};
+
+
 export const deleteProductById = ( id ) => {
     return axios.delete( `/product/${id}`,
     /*{ withCredentials: true }*/

@@ -5,30 +5,6 @@
                 <h1>Please fill updated details of the product </h1>
                 <hr />
                 <form method="POST" @submit.prevent="updateproduct()" >
-                    <div class="form-group">
-                        <label for="email">User Id(<small>Registed email</small>)</label>
-                        <input
-                            type="email"
-                            class="form-control"
-                            name="email"
-                            id="email"
-                            placeholder="john.doe@example.com"
-                            v-model="form.email"
-                            @blur="$v.form.email.$touch()"
-                            :class="{
-                                'is-invalid': shouldAppendErrorClass($v.form.email),
-                                'is-valid': shouldAppendValidClass($v.form.email)
-                            }"
-                        />
-                        <div v-if="$v.form.email.$error">
-                            <div v-if="!$v.form.email.required" class="error-message">
-                                <small>The email field is required</small>
-                            </div>
-                            <div v-if="!$v.form.email.email" class="error-message">
-                                <small>Invalid email address</small>
-                            </div>
-                        </div>
-                    </div>
                      <div class="form-group">
                         <label for="product-name">Product Name</label>
                         <input
@@ -36,15 +12,15 @@
                             id="name"
                             placeholder="Product Name"
                             class="form-control"
-                            v-model="form.productName"
-                            @blur="$v.form.productName.$touch()"
+                            v-model="form.name"
+                            @blur="$v.form.name.$touch()"
                             :class="{
-                            'is-invalid': shouldAppendErrorClass($v.form.productName),
-                            'is-valid': shouldAppendValidClass($v.form.productName),
+                            'is-invalid': shouldAppendErrorClass($v.form.name),
+                            'is-valid': shouldAppendValidClass($v.form.name),
                             }" />
 
-                        <div v-if="$v.form.productName.$error">
-                            <div v-if="!$v.form.productName.required" class="text-danger">
+                        <div v-if="$v.form.name.$error">
+                            <div v-if="!$v.form.name.required" class="text-danger">
                             <small>
                                 This field is required
                             </small>
@@ -144,10 +120,9 @@
                        
                     <div class="form-group">
                         <button class="btn btn-primary" :disabled="$v.form.$invalid">Update Product</button>
-                        <!-- <app-spinner v-if="processing" /> -->
                     </div>
                      <div>
-                        <small><router-link to="/adminHome">Go Back</router-link></small>
+                        <small><router-link to="/" >Go Back</router-link></small>
                     </div>
                 </form>
             </div>
@@ -157,35 +132,26 @@
 
 <script>
     import Vue from 'vue';
-    import { email, required } from 'vuelidate/lib/validators'
-    import { updateProduct } from '@/services/product';
-   //import config from '@/config';
+    import { required } from 'vuelidate/lib/validators'
+   import { updateProduct } from '../../services/product';
     export default {
-        name: 'AppSignUp',
-        props: [ 'product' ],
-        // data() {
-        //     return {
-        //         processing: false,
-        //         form: {
-        //             productName: '',
-        //             category: '',
-        //             email: '',
-        //             price: 0,
-        //             stockQuantity: 0,
-        //             description: '',
-        //         }
-        //     };
-        // },
+        name: 'UpdateProduct',
+        props: [ 
+            'item',
+             ],
+        data() {
+            return {
+                 form: {
+                   ...this.item
+                }     
+            };
+        },
         validations: {
             form: {
-                productName: {
-                    //required
+                name: {
+                    required
                 },
                 category: {
-                    //required
-                },
-                email: {
-                    email,
                     //required
                 },
                 price:{
@@ -202,17 +168,16 @@
          methods: {
            updateproduct(){
             updateProduct({ 
-                name: this.form.productName,
-                ownerId: this.form.email,
+                name: this.form.name,
                 category: this.form.category,
                 description: this.form.description,
                 price: this.form.price,
                 stockQuantity: this.form.stockQuantity,
-                  })
+                  }, this.form._id)
                 .then( () =>  {
-                    this.$router.push( { name: 'adminHome' } )  
+                    this.$router.push( { name: 'home' } )  
                      Vue.$toast.open({
-                        message: `Product has been successfully added`,
+                        message: `Product has been successfully updated`,
                         type: 'success'
                     });
                 })
@@ -223,11 +188,10 @@
                     });
                 });    
         },
-            shouldAppendValidClass( field ) {
-                console.log( field );
+        shouldAppendValidClass( field ) {
                 return !field.$invalid && field.$model && field.$dirty;
             },
-            shouldAppendErrorClass( field ) {
+        shouldAppendErrorClass( field ) {
                 return field.$error;
             }
         }
